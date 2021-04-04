@@ -15,12 +15,12 @@ function setup() {
   database=firebase.database();
   createCanvas(1500,700);
 
-  balloon=createSprite(250,450,150,150);
+  balloon=createSprite(300,450,150,150);
   balloon.addAnimation("hotAirBalloon",balloonImage1);
-  balloon.scale=0.5;
+  balloon.scale=0.7;
 
   textSize(20);
-  var yo=database.ref('ball/position')
+  var yo=database.ref('balloon/position')
   yo.on("value",readPosition) 
 }
 
@@ -30,19 +30,21 @@ function draw() {
 
   if(keyDown(LEFT_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage1);
-    writePosition(0,-10)
+    writePosition(-10,0)
   }
   if(keyDown(RIGHT_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage2);
-    writePosition(0,10)
+    writePosition(10,0)
   }
   if(keyDown(UP_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage2);
-    writePosition(-10,0)
+    writePosition(0,-10)
+    balloon.scale=balloon.scale-0.011
   }
   if(keyDown(DOWN_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage2);
-    writePosition(10,0)
+    writePosition(0,10)
+    balloon.scale=balloon.scale+0.011
   }
 
   drawSprites();
